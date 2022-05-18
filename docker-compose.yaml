@@ -5,20 +5,41 @@ services:
     image: 476190904340.dkr.ecr.ap-northeast-2.amazonaws.com/grabit_backend:latest
     port: 8080:8080
     environment:
-      - name: SPRING_PROFILES_ACTIVE
-        value: local
-      - name: SPRING_DATASOURCE_URL
-        value: jdbc:mysql://localhost:3306/grabit
-      - name: SPRING_DATASOURCE_USERNAME
-        value: root
-      - name: SPRING_JPA_HIBERNATE_DDL_AUTO
-        value: update
+      - SPRING_PROFILES_ACTIVE=local
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.jdbc.Driver
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/grabit
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
+
+      - CLOUD_AWS_REGION_STATIC=ap-northeast-2
+      - CLOUD_AWS_S3_BUCKET=local-bucket
+      - CLOUD_AWS_S3_MOCK_PORT=8001
+      - CLOUD_AWS_STACK_AUTO=false
+      - CLOUD_AWS_CDN=http://localhost:8001/
+
+      - LOGGING_LEVEL_COM_AMAZONAWS_UTIL_EC2METADATATUILS=error
+
+      - MONGODBURI=mongodb://root:root@localhost:27017/grabit
+    env_file:
+      - grabit.env
   
   db:
     image: mysql:5.7
     port: 3306:3306
     environment:
-      - name: MYSQL_ROOT_PASSWORD
-        value: root
-      - name: MYSQL_DATABASE
-        value: grabit
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=grabit
+
+  mongo:
+    image: mongo:4.2.8
+    port: 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=grabit
+  
+  s3:
+    image: findify/s3mock:latest
+    port: 8001:8001
+  
