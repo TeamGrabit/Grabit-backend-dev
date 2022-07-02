@@ -2,7 +2,7 @@ version: "3.9"
 services:
 
   backend:
-    image: 476190904340.dkr.ecr.ap-northeast-2.amazonaws.com/grabit_backend:latest
+    image: qf9ar8nv/grabit-backend-dev:0.0
     pull_policy: always
     ports:
       - 8080:8080
