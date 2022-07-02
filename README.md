@@ -1,12 +1,10 @@
 # Backend Server to Develop
 
-The backend server to develop Using Docker, Docker Compose, and AWS ECR.
+The backend server to develop Using Docker, Docker-Compose.
 
 ### Prerequisites
 
 - docker, docker-compose
-- AWS CLI
-- AWS credentials
 - "grabit.env" file
 
 ### Setup
@@ -16,8 +14,8 @@ The backend server to develop Using Docker, Docker Compose, and AWS ECR.
 
 ### Deploy
 
-- `docker-compose up -d`
-- Run to Image from aws ECR: latest tag
+- `docker-compose up`
+- Run to Image from public registry for development.
 
 ### Destroy
 
@@ -30,11 +28,6 @@ The backend server to develop Using Docker, Docker Compose, and AWS ECR.
 ### grabit.env file
 
 - This file is stored Github OAuth information such as client_id, client_secret, and redirect_uri.
-
-### AWS Credentials for pulling images from ECR
-
-- `aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 476190904340.dkr.ecr.ap-northeast-2.amazonaws.com`
-- "Login Succeeded" is printed
 
 ### Check to Server live
 
