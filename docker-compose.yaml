@@ -41,8 +41,12 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=grabit
+      - TZ=Asia/Seoul
     volumes:
       - ./grabit-db:/var/lib/mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
 
   mongo:
     image: mongo:4.2.8
